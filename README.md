@@ -9,4 +9,4 @@ Prerequisites
 - Install timestamp with ````sudo apt-get install moreutils -y````
 - Install secure delete with ````sudo apt-get install secure-delete -y````
 - Email is setup on the Raspberry Pi.  Using postfix in this case.  Instructions are [here](https://medium.com/codingtown/send-mail-using-postfix-server-bbb08331d39d).
-
+- Configure GPG emailing, 

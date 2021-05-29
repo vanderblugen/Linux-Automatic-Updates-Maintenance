@@ -53,10 +53,10 @@ echo -e $THISSTRING >> /home/pi/$THISFILENAME
 echo "[Finishing and rebooting: sudo reboot now]" 2>&1 | ts >> /home/pi/$THISFILENAME
 echo -e $THISSTRING >> /home/pi/$THISFILENAME
 
-#cat /home/pi/$THISFILENAME | gpg -ear "<shade@vanbendegom.com>" | mail -a "Subject: Monthly Maintenance" -a "X-Custom-Header: yes" "shade@vanbendegom.com"
+#cat /home/pi/$THISFILENAME | gpg -ear "<address1@mail.com>" | mail -a "Subject: Monthly Maintenance" -a "X-Custom-Header: yes" "address2@mail.com"
 
-#srm -vz  /home/pi/$THISFILENAME
+srm -vz  /home/pi/$THISFILENAME
 unset THISFILENAME
-#sudo reboot now
+sudo reboot now
 
 exit 0

@@ -8,5 +8,5 @@ For set it and forget it mentailty, put into the ````/etc/cron.weekly```` or ```
 Prerequisites
 - Install timestamp with ````sudo apt-get install moreutils -y````
 - Install secure delete with ````sudo apt-get install secure-delete -y````
-- Email is setup on the Raspberry Pi.  Using postfix in this case.  Instructions are [here](https://medium.com/codingtown/send-mail-using-postfix-server-bbb08331d39d).
-- Configure GPG emailing, 
+- Able to email on the system from the command line.  Using postfix in this case.  Instructions are [here](https://medium.com/codingtown/send-mail-using-postfix-server-bbb08331d39d).
+- Able to encrypt emails from command line.  Instructions are [here](https://github.com/vanderblugen/Send-Encrypted-Email-From-Linux)

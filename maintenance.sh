@@ -13,6 +13,11 @@ cpuf=$(echo "(1.8 * $cpu) + 32" |bc)
 gpuf=$(echo "(1.8 * $gpu) + 32" |bc)
 
 echo "[Starting]" 2>&1 | ts >> /home/pi/$THISFILENAME
+
+echo "[Changing File System to read/write]" 2>&1 | ts >> /home/pi/$THISFILENAME
+sudo mount -o remount,rw /boot 2>&1 | >> /home/pi/$THISFILENAME
+echo -e $THISSTRING >> /home/pi/$THISFILENAME
+
 echo "[Current GPU Temp] GPU => $gpu'C ($gpuf'F)" 2>&1 | ts >> /home/pi/$THISFILENAME
 echo "[Current CPU Temp] CPU => $cpu'C ($cpuf'F)" 2>&1 | ts >> /home/pi/$THISFILENAME
 echo -e $THISSTRING >> /home/pi/$THISFILENAME
@@ -41,13 +46,17 @@ echo "[Showing Free Space Information]" 2>&1 | ts >> /home/pi/$THISFILENAME
 sudo df 2>&1 | ts >> /home/pi/$THISFILENAME
 echo -e $THISSTRING >> /home/pi/$THISFILENAME
 
+echo "[Changing File System to read only]" 2>&1 | ts >> /home/pi/$THISFILENAME
+sudo mount -o remount,ro /boot 2>&1 | >> /home/pi/$THISFILENAME
+echo -e $THISSTRING >> /home/pi/$THISFILENAME
+
 echo "[Finishing and rebooting: sudo reboot now]" 2>&1 | ts >> /home/pi/$THISFILENAME
 echo -e $THISSTRING >> /home/pi/$THISFILENAME
 
-cat /home/pi/$THISFILENAME | gpg -ear "<email@1address1.com>" | mail -a "Subject: Monthly Maintenance" -a "X-Custom-Header: yes" "email@address2.com"
+#cat /home/pi/$THISFILENAME | gpg -ear "<shade@vanbendegom.com>" | mail -a "Subject: Monthly Maintenance" -a "X-Custom-Header: yes" "shade@vanbendegom.com"
 
-srm -vz  /home/pi/$THISFILENAME
+#srm -vz  /home/pi/$THISFILENAME
 unset THISFILENAME
-sudo reboot now
+#sudo reboot now
 
 exit 0

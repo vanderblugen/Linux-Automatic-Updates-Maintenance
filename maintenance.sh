@@ -61,7 +61,7 @@ echo -e $THISSTRING >> ~/$THISFILENAME
 echo "[Finishing and rebooting: sudo reboot now]" 2>&1 | ts >> ~/$THISFILENAME
 echo -e $THISSTRING >> ~/$THISFILENAME
 
-cat ~/$THISFILENAME | gpg -ear "<address1@mail.com>" | mail -a "Subject: Monthly Maintenance" -a "X-Custom-Header: yes" "address2@mail.com"
+cat ~/$THISFILENAME | gpg -ear "<address1@mail.com>" | mail -a "Subject: Regular Maintenance" -a "X-Custom-Header: yes" "address2@mail.com"
 
 srm -vz  ~/$THISFILENAME
 unset THISFILENAME

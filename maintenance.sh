@@ -48,6 +48,18 @@ echo "[Running Autoclean]" 2>&1 | ts >> ~/$THISFILENAME
 apt-get autoclean -y 2>&1 | ts >> ~/$THISFILENAME
 echo -e $THISSTRING >> ~/$THISFILENAME
 
+echo "[finger]" 2>&1 | ts >> ~/$THISFILENAME
+sudo finger 2>&1 | ts >> ~/$THISFILENAME
+echo -e $THISSTRING >> ~/$THISFILENAME
+
+echo "[w]" 2>&1 | ts >> ~/$THISFILENAME
+sudo w 2>&1 | ts >> ~/$THISFILENAME
+echo -e $THISSTRING >> ~/$THISFILENAME
+
+echo "[users]" 2>&1 | ts >> ~/$THISFILENAME
+sudo users 2>&1 | ts >> ~/$THISFILENAME
+echo -e $THISSTRING >> ~/$THISFILENAME
+
 echo "[Showing Free Space Information]" 2>&1 | ts >> ~/$THISFILENAME
 sudo df 2>&1 | ts >> ~/$THISFILENAME
 echo -e $THISSTRING >> ~/$THISFILENAME

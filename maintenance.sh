@@ -63,7 +63,7 @@ echo -e $THISSTRING >> ~/$THISFILENAME
 
 cat ~/$THISFILENAME | gpg -ear "<address1@mail.com>" | mail -a "Subject: Regular Maintenance" -a "X-Custom-Header: yes" "address2@mail.com"
 
-srm -vz  ~/$THISFILENAME
+shred -vz  ~/$THISFILENAME
 unset THISFILENAME
 sudo reboot now
 

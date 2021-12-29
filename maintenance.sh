@@ -29,7 +29,7 @@ echo -e $THISSTRING >> ~/$THISFILENAME
 ################################################################################
 
 echo "[Running Update]" 2>&1 | ts >> ~/$THISFILENAME
-apt-get update -y 2>&1 | ts >> ~/$THISFILENAME
+apt update -y 2>&1 | ts >> ~/$THISFILENAME
 echo -e $THISSTRING >> ~/$THISFILENAME
 
 echo "[Running Upgrade]" 2>&1 | ts >> ~/$THISFILENAME

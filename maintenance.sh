@@ -7,7 +7,7 @@ echo "Maintenance for $HOSTNAME" >> ~/$THISFILENAME
 echo -e $THISSTRING >> ~/$THISFILENAME
 
 ########################## ONLY WORKS ON REASPBERRY PI ########################
-gpu=$(/opt/vc/bin/vcgencmd measure_temp | awk -F "[=\']" '{print $2}')
+gpu=$(/usr/bin/vcgencmd measure_temp | awk -F "[=\']" '{print $2}')
 cpu=$(</sys/class/thermal/thermal_zone0/temp)
 cpu=$(echo "$cpu / 100 * 0.1" | bc)
 cpuf=$(echo "(1.8 * $cpu) + 32" |bc)

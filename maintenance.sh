@@ -33,15 +33,15 @@ apt-get update -y 2>&1 | ts >> ~/$THISFILENAME
 echo -e $THISSTRING >> ~/$THISFILENAME
 
 echo "[Running Upgrade]" 2>&1 | ts >> ~/$THISFILENAME
-apt-get upgrade -y 2>&1 | ts >> ~/$THISFILENAME
+apt upgrade -y 2>&1 | ts >> ~/$THISFILENAME
 echo -e $THISSTRING >> ~/$THISFILENAME
 
 echo "[Running Dist-Upgrade]" 2>&1 | ts >> ~/$THISFILENAME
-apt-get dist-upgrade -y 2>&1 | ts >> ~/$THISFILENAME
+apt full-upgrade -y 2>&1 | ts >> ~/$THISFILENAME
 echo -e $THISSTRING >> ~/$THISFILENAME
 
 echo "[Running Autoremove]" 2>&1 | ts >> ~/$THISFILENAME
-apt-get autoremove -y 2>&1 | ts >> ~/$THISFILENAME
+apt autoremove -y 2>&1 | ts >> ~/$THISFILENAME
 echo -e $THISSTRING >> ~/$THISFILENAME
 
 echo "[Running Autoclean]" 2>&1 | ts >> ~/$THISFILENAME

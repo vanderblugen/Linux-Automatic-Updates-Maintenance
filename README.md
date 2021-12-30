@@ -1,4 +1,4 @@
-# automatic-linux-updates-maintenance
+# Linux Automatic Updates and Maintenance
 Automatic Raspberry and Linux Updates
 
 This script is meant to be scheduled to run on a regular basis and emails encrypted email to a specified email address

@@ -9,7 +9,7 @@ This is a work in progress, a sort of alpha or beta version.
 
 Prerequisites
 - Install timestamp with ````sudo apt install moreutils -y````
-- Install bc with ````sudo apt install bc -y````
-- Install finger with ````sudo apt install finger -y````
+- Install bc with ````sudo apt-get install bc -y````
+- Install finger with ````sudo apt-get install finger -y````
 - Able to email on the system from the command line.  Using postfix in this case.  Instructions are [here](https://medium.com/codingtown/send-mail-using-postfix-server-bbb08331d39d).
 - Able to encrypt emails from command line.  Instructions are [here](https://github.com/vanderblugen/Send-Encrypted-Email-From-Linux)

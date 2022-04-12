@@ -48,6 +48,10 @@ echo "[Running Autoclean]" 2>&1 | ts >> ~/$THISFILENAME
 apt-get autoclean -y 2>&1 | ts >> ~/$THISFILENAME
 echo -e $THISSTRING >> ~/$THISFILENAME
 
+echo "[Last Logged In Users]" 2>&1 | ts >> ~/$THISFILENAME
+sudo lastb 2>&1 | ts >> ~/$THISFILENAME
+echo -e $THISSTRING >> ~/$THISFILENAME
+
 echo "[finger]" 2>&1 | ts >> ~/$THISFILENAME
 sudo finger 2>&1 | ts >> ~/$THISFILENAME
 echo -e $THISSTRING >> ~/$THISFILENAME

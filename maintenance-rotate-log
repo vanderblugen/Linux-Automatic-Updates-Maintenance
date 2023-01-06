@@ -1,0 +1,22 @@
+/var/log/maintenance.log 
+{
+	# how often to rotate the log
+	monthly
+	su root syslog
+	
+	# changes the log to 600 permissions for root as ower and group
+	create 600 root root
+	
+	# keep 6 logs
+	rotate 6
+	
+	# set the rotate log extension as mmyyyy
+	dateext
+	dateformat -%m%Y
+	
+	# do not make it if empty
+	notifempty
+	
+	# compress the log
+	compress
+}

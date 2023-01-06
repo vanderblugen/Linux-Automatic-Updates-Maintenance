@@ -1,0 +1,27 @@
+#!/bin/bash
+PATH=/bin:/usr/bin
+THISFILENAME="/var/log/maintenance.log"
+
+date >> $THISFILENAME
+
+chmod 600 $THISFILENAME
+
+echo "[Running Update]" 2>&1 | ts >> $THISFILENAME
+apt-get update -y 2>&1 | ts >> $THISFILENAME
+
+echo "[Running Upgrade]" 2>&1 | ts >> $THISFILENAME
+apt-get upgrade -y 2>&1 | ts >> $THISFILENAME
+
+echo "[Running Dist-Upgrade]" 2>&1 | ts >> $THISFILENAME
+apt-get dist-upgrade -y 2>&1 | ts >> $THISFILENAME
+
+echo "[Running Autoremove]" 2>&1 | ts >> $THISFILENAME
+apt-get autoremove -y 2>&1 | ts >> $THISFILENAME
+
+echo "[Running Autoclean]" 2>&1 | ts >> $THISFILENAME
+apt-get autoclean -y 2>&1 | ts >> $THISFILENAME
+
+echo "[Rebooting]" 2>&1 | ts >> $THISFILENAME
+sudo reboot now
+
+exit 0

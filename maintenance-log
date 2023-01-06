@@ -4,7 +4,7 @@ THISFILENAME="/var/log/maintenance.log"
 
 date >> $THISFILENAME
 
-chmod 600 $THISFILENAME
+chmod 644 $THISFILENAME
 
 echo "[Running Update]" 2>&1 | ts >> $THISFILENAME
 apt-get update -y 2>&1 | ts >> $THISFILENAME

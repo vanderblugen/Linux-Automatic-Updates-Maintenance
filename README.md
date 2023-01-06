@@ -2,9 +2,10 @@
 Automatic Raspberry and Linux Updates
 
 This script is meant to be scheduled to run on a regular basis and emails encrypted email to a specified email address
-For set it and forget it mentailty, put into the ````/etc/cron.daily````, ````/etc/cron.weekly````, or ````/etc/cron.monthly```` folders
 
-This is a work in progress, a sort of alpha or beta version.
+For set it and forget it, put into the ````/etc/cron.daily````, ````/etc/cron.weekly````, or ````/etc/cron.monthly```` folders
+
+This is a work in progress.
 
 
 Prerequisites

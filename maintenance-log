@@ -49,13 +49,16 @@ if grep "$MIRROR" /etc/passwd >/dev/null 2>&1; then
     # if mmpm exists run the if
     if test -f "$MMPM"; then
         echo "[Refresh Mirror DB]" 2>&1 | ts | tee -a $THISFILENAME
-        su -l $MIRROR -c 'mmpm db --refresh'
+        yes | su -l $MIRROR -c 'mmpm db --refresh' 2>&1 | ts | tee -a $THISFILENAME
 
         echo "[Magic Mirror Update]" 2>&1 | ts | tee -a $THISFILENAME
-        su -l $MIRROR -c 'mmpm update -y'
+        yes | su -l $MIRROR -c 'mmpm update' 2>&1 | ts | tee -a $THISFILENAME
 
         echo "[Magic Mirror Upgrade]" 2>&1 | ts | tee -a $THISFILENAME
-        su -l $MIRROR -c 'mmpm upgrade -y'
+        yes | su -l $MIRROR -c 'mmpm upgrade' 2>&1 | ts | tee -a $THISFILENAME
+        
+        echo "[More Magic Mirror Upgrade(s)]" 2>&1 | ts | tee -a $THISFILENAME
+        yes | su -l $MIRROR -c 'pip3 install --user --upgrade mmpm' 2>&1 | ts | tee -a $THISFILENAME
     fi
 fi
 

@@ -12,6 +12,11 @@ SHOWFREESPACE=false
 SHOWMOUNT=false
 SHOWSWAPON=false
 
+if [[ $(/usr/bin/id -u) -ne 0 ]]; then
+  echo "Please execute script as root"
+  exit 1
+fi
+
 # which user is using magic mirror
 MIRROR="mirror"
 

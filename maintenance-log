@@ -25,18 +25,18 @@ fi
 
 date >> $THISFILENAME
 
-echo "[Running Update]" 2>&1 | ts >> $THISFILENAME
-apt-get update -y 2>&1 | ts >> $THISFILENAME
+echo "[Running Update]" 2>&1 | ts | tee -a $THISFILENAME
+apt-get update -y 2>&1 | ts | tee -a $THISFILENAME
 
 # if snap exists run the if
 if test -f "/usr/bin/snap"; then
-    echo "[Snap Refresh]" 2>&1 | ts >> $THISFILENAME
+    echo "[Snap Refresh]" 2>&1 | ts | tee -a $THISFILENAME
     /usr/bin/snap refresh
 fi
 
 # if flatpak exists run the if
 if test -f "/usr/bin/flatpak"; then
-    echo "[Flatpak Update]" 2>&1 | ts >> $THISFILENAME
+    echo "[Flatpak Update]" 2>&1 | ts | tee -a $THISFILENAME
     /usr/bin/flatpak update
 fi
 
@@ -45,27 +45,27 @@ MMPM=$(su -l $MIRROR -c 'which mmpm')
 
 # if mmpm exists run the if
 if test -f $MMPM; then
-    echo "[Refresh Mirror DB]" 2>&1 | ts >> $THISFILENAME
+    echo "[Refresh Mirror DB]" 2>&1 | ts | tee -a $THISFILENAME
     su -l $MIRROR -c 'mmpm db --refresh'
 
-    echo "[Magic Mirror Update]" 2>&1 | ts >> $THISFILENAME
+    echo "[Magic Mirror Update]" 2>&1 | ts | tee -a $THISFILENAME
     su -l $MIRROR -c 'mmpm update -y'
 
-    echo "[Magic Mirror Upgrade]" 2>&1 | ts >> $THISFILENAME
+    echo "[Magic Mirror Upgrade]" 2>&1 | ts | tee -a $THISFILENAME
     su -l $MIRROR -c 'mmpm upgrade -y'
 fi
 
-echo "[Running Upgrade]" 2>&1 | ts >> $THISFILENAME
-apt-get upgrade -y 2>&1 | ts >> $THISFILENAME
+echo "[Running Upgrade]" 2>&1 | ts | tee -a $THISFILENAME
+apt-get upgrade -y 2>&1 | ts | tee -a $THISFILENAME
 
-echo "[Running Dist-Upgrade]" 2>&1 | ts >> $THISFILENAME
-apt-get dist-upgrade -y 2>&1 | ts >> $THISFILENAME
+echo "[Running Dist-Upgrade]" 2>&1 | ts | tee -a $THISFILENAME
+apt-get dist-upgrade -y 2>&1 | ts | tee -a $THISFILENAME
 
-echo "[Running Autoremove]" 2>&1 | ts >> $THISFILENAME
-apt-get autoremove -y 2>&1 | ts >> $THISFILENAME
+echo "[Running Autoremove]" 2>&1 | ts | tee -a $THISFILENAME
+apt-get autoremove -y 2>&1 | ts | tee -a $THISFILENAME
 
-echo "[Running Autoclean]" 2>&1 | ts >> $THISFILENAME
-apt-get autoclean -y 2>&1 | ts >> $THISFILENAME
+echo "[Running Autoclean]" 2>&1 | ts | tee -a $THISFILENAME
+apt-get autoclean -y 2>&1 | ts | tee -a $THISFILENAME
 
 if [ $SHOWFINGER == 1 ]; then
 
@@ -115,7 +115,7 @@ if [! -f "/usr/bin/shred"]; then
     apt-get install shred -y
 fi
 
-echo "[Rebooting]" 2>&1 | ts >> $THISFILENAME
+echo "[Rebooting]" 2>&1 | ts | tee -a $THISFILENAME
 
 # if email is set to 1 then email otherwise do not
 if [ $EMAIL == 1 ] ; then

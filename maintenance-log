@@ -1,17 +1,58 @@
 #!/bin/bash
 PATH=/bin:/usr/bin
-THISFILENAME="/var/log/maintenance.log"
+
+# should this script email output.  1 for true and 0 for false
+EMAIL=0
+
+# include extra information in the log/email. 1 for true and 0 for false
+SHOWFINGER = 0
+SHOWWHO = 0
+SHOWUSERS = 0
+SHOWFREESPACE = 0
+SHOWMOUNT = 0
+SHOWSWAPON = 0
+
+# which user is using magic mirror
+MIRROR="mirror"
+
+# outupt a random character filename
+THISFILENAME="$(openssl rand -hex 8).txt"
+
+# install ts if not installed
+if [! -f "/usr/bin/ts"]; then
+    sudo apt-get install moreutils -y
+fi
 
 date >> $THISFILENAME
-
-chmod 644 $THISFILENAME
 
 echo "[Running Update]" 2>&1 | ts >> $THISFILENAME
 apt-get update -y 2>&1 | ts >> $THISFILENAME
 
+# if snap exists run the if
 if test -f "/usr/bin/snap"; then
-    echo "[Refresh Snap]" 2>&1 | ts >> $THISFILENAME
+    echo "[Snap Refresh]" 2>&1 | ts >> $THISFILENAME
     /usr/bin/snap refresh
+fi
+
+# if flatpak exists run the if
+if test -f "/usr/bin/flatpak"; then
+    echo "[Flatpak Update]" 2>&1 | ts >> $THISFILENAME
+    /usr/bin/flatpak update
+fi
+
+# look for where mmpm is at
+MMPM=$(su -l $MIRROR -c 'which mmpm')
+
+# if mmpm exists run the if
+if test -f $MMPM; then
+    echo "[Refresh Mirror DB]" 2>&1 | ts >> $THISFILENAME
+    su -l $MIRROR -c 'mmpm db --refresh'
+
+    echo "[Magic Mirror Update]" 2>&1 | ts >> $THISFILENAME
+    su -l $MIRROR -c 'mmpm update -y'
+
+    echo "[Magic Mirror Upgrade]" 2>&1 | ts >> $THISFILENAME
+    su -l $MIRROR -c 'mmpm upgrade -y'
 fi
 
 echo "[Running Upgrade]" 2>&1 | ts >> $THISFILENAME
@@ -26,12 +67,66 @@ apt-get autoremove -y 2>&1 | ts >> $THISFILENAME
 echo "[Running Autoclean]" 2>&1 | ts >> $THISFILENAME
 apt-get autoclean -y 2>&1 | ts >> $THISFILENAME
 
-if test -f "/usr/bin/flatpak"; then
-    echo "[Updating Flatpak]" 2>&1 | ts >> $THISFILENAME
-    /usr/bin/flatpak update
+if [ $SHOWFINGER == 1 ]; then
+
+    # install finger if not installed
+    if [! -f "/usr/bin/finger"]; then
+        sudo apt-get install finger -y
+    fi
+
+    echo "[finger]" 2>&1 | ts >> ~/$THISFILENAME
+    sudo finger 2>&1 | ts >> ~/$THISFILENAME
+    echo -e $THISSTRING >> ~/$THISFILENAME
+
+fi
+
+if [$SHOWWHO == 1]; then
+    echo "[Who is Logged In and What They are Doing]" 2>&1 | ts >> ~/$THISFILENAME
+    sudo w 2>&1 | ts >> ~/$THISFILENAME
+    echo -e $THISSTRING >> ~/$THISFILENAME
+fi
+
+if [$SHOWUSERS == 1]; then
+    echo "[Users Currently Logged In]" 2>&1 | ts >> ~/$THISFILENAME
+    sudo users 2>&1 | ts >> ~/$THISFILENAME
+    echo -e $THISSTRING >> ~/$THISFILENAME
+fi
+
+if [ $SHOWFREESPACE == 1 ]; then
+    echo "[Showing Free Space Information]" 2>&1 | ts >> ~/$THISFILENAME
+    sudo df 2>&1 | ts >> ~/$THISFILENAME
+    echo -e $THISSTRING >> ~/$THISFILENAME
+fi
+
+if [ $SHOWMOUNT == 1 ]; then
+    echo "[Drive Mount Information]" 2>&1 | ts >> ~/$THISFILENAME
+    sudo mount 2>&1 | ts >> ~/$THISFILENAME
+    echo -e $THISSTRING >> ~/$THISFILENAME
+fi
+
+if [ $SWAPON == 1 ]; then
+    echo "[Swapfile Summary]" 2>&1 | ts >> ~/$THISFILENAME
+    sudo swapon -s 2>&1 | ts >> ~/$THISFILENAME
+    echo -e $THISSTRING >> ~/$THISFILENAME
+fi
+
+# install shred if not installed
+if [! -f "/usr/bin/shred"]; then
+    apt-get install shred -y
 fi
 
 echo "[Rebooting]" 2>&1 | ts >> $THISFILENAME
+
+# if email is set to 1 then email otherwise do not
+if [ $EMAIL == 1 ] ; then
+    cat ~/$THISFILENAME | gpg -ear "<address1@mail.com>" | mail -a "Subject: Regular Maintenance" -a "X-Custom-Header: yes" "address2@mail.com"
+else
+    cat $THISFILENAME >> /var/log/maintenance.log
+    chmod 644 /var/log/maintenance.log
+fi
+
+shred -uvz  $THISFILENAME
+
 sudo reboot now
 
 exit 0

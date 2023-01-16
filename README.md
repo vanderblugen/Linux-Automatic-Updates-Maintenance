@@ -2,17 +2,15 @@
 Automatic Linux Updates
 
 This script is meant to be scheduled to run on a regular basis.
-- maintenance-email sends an encrpted email to a recippeint.
+- set EMAIL to 1 for sending an encrpted email to a recippeint.
 - maintenance-log generates a log put into /var/log and maintenance-log-rotate rotates that log on a monthly basis for 6 months
 
 For set it and forget it, put into the ````/etc/cron.daily````, ````/etc/cron.weekly````, or ````/etc/cron.monthly```` folders
 
 This is a work in progress.
 
-# Using maintenance-email
-- Install timestamp, bc, and finger
-  - ````sudo apt install moreutils bc finger -y````
-- Able to email on the system from the command line.  Using postfix in this case.  Instructions are [here](https://medium.com/codingtown/send-mail-using-postfix-server-bbb08331d39d).
+# If emailing with this log.
+- Using postfix.  Instructions are [here](https://medium.com/codingtown/send-mail-using-postfix-server-bbb08331d39d).
 - Able to encrypt emails from command line.  Instructions are [here](https://github.com/vanderblugen/Send-Encrypted-Email-From-Linux)
 
 # Using maintenance-log

@@ -9,6 +9,11 @@ chmod 644 $THISFILENAME
 echo "[Running Update]" 2>&1 | ts >> $THISFILENAME
 apt-get update -y 2>&1 | ts >> $THISFILENAME
 
+if test -f "/usr/bin/snap"; then
+    echo "[Refresh Snap]" 2>&1 | ts >> $THISFILENAME
+    /usr/bin/snap refresh
+fi
+
 echo "[Running Upgrade]" 2>&1 | ts >> $THISFILENAME
 apt-get upgrade -y 2>&1 | ts >> $THISFILENAME
 
@@ -20,6 +25,11 @@ apt-get autoremove -y 2>&1 | ts >> $THISFILENAME
 
 echo "[Running Autoclean]" 2>&1 | ts >> $THISFILENAME
 apt-get autoclean -y 2>&1 | ts >> $THISFILENAME
+
+if test -f "/usr/bin/flatpak"; then
+    echo "[Updating Flatpak]" 2>&1 | ts >> $THISFILENAME
+    /usr/bin/flatpak update
+fi
 
 echo "[Rebooting]" 2>&1 | ts >> $THISFILENAME
 sudo reboot now

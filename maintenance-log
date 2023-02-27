@@ -36,13 +36,13 @@ apt-get update -y 2>&1 | ts | tee -a $THISFILENAME
 # if snap exists run the if
 if test -f "/usr/bin/snap"; then
     echo "[Snap Refresh]" 2>&1 | ts | tee -a $THISFILENAME
-    /usr/bin/snap refresh
+    /usr/bin/snap refresh 2>&1 | ts | tee -a $THISFILENAME
 fi
 
 # if flatpak exists run the if
 if test -f "/usr/bin/flatpak"; then
     echo "[Flatpak Update]" 2>&1 | ts | tee -a $THISFILENAME
-    /usr/bin/flatpak update
+    /usr/bin/flatpak update -y 2>&1 | ts | tee -a $THISFILENAME
 fi
 
 # if mirror user exists

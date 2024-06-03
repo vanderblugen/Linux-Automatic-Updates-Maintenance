@@ -17,6 +17,12 @@ if [[ $(/usr/bin/id -u) -ne 0 ]]; then
   exit 1
 fi
 
+# Verify TS is installed
+if ! test -f "/usr/bin/ts"; then
+  apt-get update -y
+  apt-get install moreutils -y
+fi
+
 # which user is using magic mirror
 MIRROR="mirror"
 

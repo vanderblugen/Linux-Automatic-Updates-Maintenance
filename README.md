@@ -15,6 +15,7 @@ This is a work in progress.
 
 # Update permissions on both
 ````sudo 700 maintenance-log-rotate````
+
 ````sudo 700 maintenance-log````
 
 # Using maintenance-log

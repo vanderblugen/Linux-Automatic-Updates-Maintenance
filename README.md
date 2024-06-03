@@ -13,6 +13,10 @@ This is a work in progress.
 - Using postfix.  Instructions are [here](https://medium.com/codingtown/send-mail-using-postfix-server-bbb08331d39d).
 - Able to encrypt emails from command line.  Instructions are [here](https://github.com/vanderblugen/Send-Encrypted-Email-From-Linux)
 
+# Update permissions on both
+````sudo 700 maintenance-log-rotate````
+````sudo 700 maintenance-log````
+
 # Using maintenance-log
 - Move maintenance-log-rotate to /etc/logrotate.d/
   - ````sudo mv maintenance-log-rotate /etc/logrotate.d/````

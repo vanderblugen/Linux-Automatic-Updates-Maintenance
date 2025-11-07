@@ -14,9 +14,10 @@ This is a work in progress.
 - Able to encrypt emails from command line.  Instructions are [here](https://github.com/vanderblugen/Send-Encrypted-Email-From-Linux)
 
 # Update permissions on both
-````sudo 700 maintenance-log-rotate````
-
-````sudo 700 maintenance-log````
+````
+sudo chmod 700 maintenance-log-rotate
+sudo chmod 700 maintenance-log
+````
 
 # Using maintenance-log
 - Move maintenance-log-rotate to /etc/logrotate.d/

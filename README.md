@@ -10,8 +10,8 @@ For set it and forget it, put into the ````/etc/cron.daily````, ````/etc/cron.we
 This is a work in progress.
 
 # If emailing with this log.
-- Using postfix.  Instructions are [here](https://medium.com/codingtown/send-mail-using-postfix-server-bbb08331d39d).
-- Able to encrypt emails from command line.  Instructions are [here](https://github.com/vanderblugen/Send-Encrypted-Email-From-Linux)
+Using postfix.  Instructions are [here](https://medium.com/codingtown/send-mail-using-postfix-server-bbb08331d39d).
+Able to encrypt emails from command line.  Instructions are [here](https://github.com/vanderblugen/Send-Encrypted-Email-From-Linux)
 
 # Update permissions on both
 ````
@@ -20,7 +20,11 @@ sudo chmod 700 maintenance-log
 ````
 
 # Using maintenance-log
-- Move maintenance-log-rotate to /etc/logrotate.d/
-  - ````sudo mv maintenance-log-rotate /etc/logrotate.d/````
-- Move maintenance-log into /etc/cron.weekly/ for weekly updates
-  -  ````sudo mv maintenance-log /etc/cron.weekly/````
+Move maintenance-log-rotate to /etc/logrotate.d/
+````
+sudo mv maintenance-log-rotate /etc/logrotate.d/
+````
+Move maintenance-log into /etc/cron.weekly/ for weekly updates
+ ````
+ sudo mv maintenance-log /etc/cron.weekly/
+````
